@@ -1,0 +1,16 @@
+body {
+    background-color: beige;
+}
+
+.navbar {
+    background-color: rgb(33, 43, 100);
+}
+
+#search-section, #main {
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
