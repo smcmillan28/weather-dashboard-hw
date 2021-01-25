@@ -22,14 +22,18 @@
 
     <div class="row">
         <!-- Setting up basic page structure -->
-        <div id="search-section" class="col-md-2">
+        <div id="search-section" class="col-md-3">
             <!-- All city searches will go here, including search form and city buttons storing previous city data -->
             <div class="input-group mb-3">
-                <input type="text" class="form-control" id="city-text" placeholder="Enter City">
-                <button class="btn btn-outline-secondary" type="button" id="city-search"><i class="fas fa-search"></i></button>
+                <input type="text" class="form-control" id="city-search" placeholder="Enter City">
+                <button class="btn btn-outline-secondary" type="button" id="search-button"><i class="fas fa-search"></i></button>
+                <button type="button" class="btn btn-secondary">Clear Search History</button>
+            </div>
+            <hr>
+            <div id="past-searches">
             </div>
         </div>
-        <div id="main" class="col-md-9">
+        <div id="main" class="col-md-8">
             <!-- Creating two new rows with full columns for Current Weather and Forecast information -->
             <div class="row">
                 <div id="current-weather" class="col-md-12">

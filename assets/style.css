@@ -6,6 +6,11 @@ body {
     background-color: rgb(33, 43, 100);
 }
 
+.row {
+    width: 90%;
+    margin: 0 auto;
+}
+
 #search-section, #main {
     background-color: white;
     margin: 20px;
@@ -14,7 +19,18 @@ body {
     border-radius: 10px;
 }
 
-#city-search {
+#search-button {
     background-color: rgb(33, 43, 100);
+}
+
+.btn-primary {
+    background-color: rgb(33, 43, 100);
+    width: 100%;
+    margin-top: 3px;
+}
+
+.btn-secondary {
+    width: 100%;
+    margin-top: 10px;
 }
 
