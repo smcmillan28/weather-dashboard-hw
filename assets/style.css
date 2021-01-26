@@ -11,9 +11,23 @@ body {
     margin: 0 auto;
 }
 
+h3 {
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    margin: 5px;
+}
+
+.section {
+    border-bottom: 1px solid black;
+}
+
 #search-section, #main {
     background-color: white;
-    margin: 20px;
+    margin: 5px;
+    margin-top: 20px;
     padding: 20px;
     border: 1px solid black;
     border-radius: 10px;
