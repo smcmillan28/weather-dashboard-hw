@@ -25,22 +25,36 @@ function addCity(event) {
     citySearch.val("");
 }
 
-searchBtn.on("click", addCity);
-
 // Write a function that makes an AJAX call to open Weather API
 
 function weatherData() {
+    // Using Position Stack Geocoding API to get latitude and longitude
+    var cityName = citySearch.val();
+    var cityQueryUrl = "http://api.positionstack.com/v1/forward?access_key=1d9b73328157570ee57517d73c03e071&query=" + cityName;
 
-    var lat = 33.441792
-    var lon = -94.037689
-    var queryUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude={part}&appid=c8d8b26d88e2efcce705725f885fb689"
-
+    // AJAX call to find where latitude and longitude are stored in the response
     $.ajax({
-        url: queryUrl,
+        url: cityQueryUrl,
         method: "GET"
-    }).then(function (response) {
-        console.log(response);
+    }).then(function (res) {
+        console.log(res);
+        // Storing response object data in latitude and longitude variables
+        var lat = res.data[0].latitude;
+        var lon = res.data[0].longitude;
+        // Open Weather query URL
+        var weatherQueryUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude={part}&appid=c8d8b26d88e2efcce705725f885fb689";
+
+        $.ajax({
+            url: weatherQueryUrl,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+        });
+
+
     });
+
 }
 
-searchBtn.on("click", weatherData)
+searchBtn.on("click", weatherData);
+searchBtn.on("click", addCity);
