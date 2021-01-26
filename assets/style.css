@@ -1,4 +1,7 @@
 body {
+    background-image: url("./images/rain.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     background-color: beige;
 }
 
@@ -13,14 +16,17 @@ body {
 
 h3 {
     text-align: center;
+    color: white;
 }
 
 p {
     font-size: 14px;
+    color: white;
 }
 
-h5 {
+h5, h4 {
     margin: 15px;
+    color: white;
 }
 
 .section {
@@ -46,6 +52,7 @@ h5 {
     padding: 20px;
     border: 1px solid black;
     border-radius: 10px;
+    background-color: black;
 }
 
 #search-button {
