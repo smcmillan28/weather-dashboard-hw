@@ -50,7 +50,7 @@ $(document).ready(function () {
     function weatherData() {
 
         var cityName = citySearch.val();
-        var cityQueryUrl = "http://www.mapquestapi.com/geocoding/v1/address?key=EO0hAAoA7bvIqA7BLFdliVelt6rPt3My&location=" + cityName;
+        var cityQueryUrl = "https://www.mapquestapi.com/geocoding/v1/address?key=EO0hAAoA7bvIqA7BLFdliVelt6rPt3My&location=" + cityName;
 
         // Using Mapquest Geocoding API to get latitude and longitude for city input
         // AJAX call to find where latitude and longitude are stored in the response
