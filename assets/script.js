@@ -10,7 +10,8 @@ $(document).ready(function () {
     var clearBtn = $("#clear-history");
 
     // Setting variable to store cities to local storage that are searched and that retrieves and past searches from local storage
-    var pastSearch = JSON.parse(localStorage.getItem("oldCities"));
+    // var pastSearch = JSON.parse(localStorage.getItem("oldCities"));
+    var pastSearch = [];
 
     // Moment.js used for date display when city is searched and for the five day forecast
     var currentTime = moment();
@@ -29,20 +30,24 @@ $(document).ready(function () {
     var dayFour = newFour.format("L");
     var dayFive = newFive.format("L");
 
+
     // Write a function that will create a button once the search button is clicked and store that city as the button text
     // This function also stores those cities in the pastSearch array and sends that array to local storage
     function addCity(event) {
         event.preventDefault();
+        var existingEntries = JSON.parse(localStorage.getItem("oldCities"));
         var newCity = citySearch.val();
         if (newCity != "" && $.inArray(newCity, pastSearch) === -1) {
             var newButton = $("<button>").addClass("btn btn-primary history");
             newButton.text(newCity);
             searchHist.prepend(newButton);
             pastSearch.unshift(newCity);
-            localStorage.setItem("oldCities", JSON.stringify(pastSearch));
         } else {
             return;
         }
+        localStorage.setItem("newEntry", JSON.stringify(newCity));
+        existingEntries.unshift(newCity);
+        localStorage.setItem("oldCities", JSON.stringify(existingEntries));
         citySearch.val("");
     }
 
@@ -170,7 +175,6 @@ $(document).ready(function () {
     });
 
     // Write function that renders anything from local storage on to page in form of button
-
     function renderStorage() {
         var oldCities = JSON.parse(localStorage.getItem("oldCities"));
         console.log(oldCities);
@@ -183,9 +187,23 @@ $(document).ready(function () {
         }
     }
 
+    function restore() {
+        var oldSearches = JSON.parse(localStorage.getItem("oldCities"));
+        localStorage.setItem("oldCities", JSON.stringify(oldSearches));
+    }
+
+    // init function that calls renderStorage function and init call to run when page is loaded
     function init() {
+        restore();
         renderStorage();
     }
 
     init();
+
+    // Write a function that clears local storage and clears the search history buttons when "Clear Search" button is clicked
+    clearBtn.click(function() {
+        localStorage.removeItem("oldCities");
+        searchHist.empty();
+    });
+
 });
