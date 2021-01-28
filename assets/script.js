@@ -9,8 +9,8 @@ $(document).ready(function () {
     var fiveDay = $("#five-day");
     var clearBtn = $("#clear-history");
 
-    //Empty array to store cities that are searched
-    var pastSearch = [];
+    // Setting variable to store cities to local storage that are searched and that retrieves and past searches from local storage
+    var pastSearch = JSON.parse(localStorage.getItem("oldCities"));
 
     // Moment.js used for date display when city is searched and for the five day forecast
     var currentTime = moment();
@@ -169,4 +169,23 @@ $(document).ready(function () {
         citySearch.val("");
     });
 
+    // Write function that renders anything from local storage on to page in form of button
+
+    function renderStorage() {
+        var oldCities = JSON.parse(localStorage.getItem("oldCities"));
+        console.log(oldCities);
+        if (oldCities !== null) {
+            for (var i = 0; i < oldCities.length; i++) {
+                var genButton = $("<button>").addClass("btn btn-primary history");
+                genButton.text(oldCities[i]);
+                searchHist.append(genButton);
+            }
+        }
+    }
+
+    function init() {
+        renderStorage();
+    }
+
+    init();
 });
