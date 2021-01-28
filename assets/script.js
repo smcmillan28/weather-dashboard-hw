@@ -7,6 +7,7 @@ $(document).ready(function () {
     var currentWeather = $("#current-weather");
     var forecast = $("#forecast");
     var fiveDay = $("#five-day");
+    var clearBtn = $("#clear-history");
 
     //Empty array to store cities that are searched
     var pastSearch = [];
@@ -34,7 +35,7 @@ $(document).ready(function () {
         event.preventDefault();
         var newCity = citySearch.val();
         if (newCity != "" && $.inArray(newCity, pastSearch) === -1) {
-            var newButton = $("<button>").addClass("btn btn-primary");
+            var newButton = $("<button>").addClass("btn btn-primary history");
             newButton.text(newCity);
             searchHist.prepend(newButton);
             pastSearch.unshift(newCity);
@@ -48,10 +49,10 @@ $(document).ready(function () {
     // Write a function that makes an AJAX call to open Weather API
     function weatherData() {
 
-        // Using Position Stack Geocoding API to get latitude and longitude for city input
         var cityName = citySearch.val();
         var cityQueryUrl = "http://api.positionstack.com/v1/forward?access_key=1d9b73328157570ee57517d73c03e071&query=" + cityName;
 
+        // Using Position Stack Geocoding API to get latitude and longitude for city input
         // AJAX call to find where latitude and longitude are stored in the response
         $.ajax({
             url: cityQueryUrl,
@@ -145,15 +146,18 @@ $(document).ready(function () {
                 fiveFollow.append(fiveHeader, dayFiveURL, fiveTemp, fiveHum);
                 fiveDay.append(fiveFollow);
             });
-
-
         });
-
     }
-
-    // Write function that takes search history button data and re-runs weatherData function
 
     searchBtn.on("click", weatherData);
     searchBtn.on("click", addCity);
+
+    // Write function that takes search history button data and re-runs weatherData function
+
+    $(document).on("click", ".history", function () {
+        citySearch.val($(this).text());
+        weatherData();
+        citySearch.val("");
+    });
 
 });
