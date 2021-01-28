@@ -10,7 +10,6 @@ $(document).ready(function () {
     var clearBtn = $("#clear-history");
 
     // Setting variable to store cities to local storage that are searched and that retrieves and past searches from local storage
-    // var pastSearch = JSON.parse(localStorage.getItem("oldCities"));
     var pastSearch = [];
 
     // Moment.js used for date display when city is searched and for the five day forecast
@@ -36,18 +35,18 @@ $(document).ready(function () {
     function addCity(event) {
         event.preventDefault();
         var existingEntries = JSON.parse(localStorage.getItem("oldCities"));
+        if (existingEntries == null) existingEntries = [];
         var newCity = citySearch.val();
-        if (newCity != "" && $.inArray(newCity, pastSearch) === -1) {
+        if (newCity != "" && $.inArray(newCity, existingEntries) === -1) {
             var newButton = $("<button>").addClass("btn btn-primary history");
             newButton.text(newCity);
             searchHist.prepend(newButton);
-            pastSearch.unshift(newCity);
+            localStorage.setItem("newEntry", JSON.stringify(newCity));
+            existingEntries.unshift(newCity);
+            localStorage.setItem("oldCities", JSON.stringify(existingEntries));
         } else {
             return;
         }
-        localStorage.setItem("newEntry", JSON.stringify(newCity));
-        existingEntries.unshift(newCity);
-        localStorage.setItem("oldCities", JSON.stringify(existingEntries));
         citySearch.val("");
     }
 
@@ -184,6 +183,8 @@ $(document).ready(function () {
                 genButton.text(oldCities[i]);
                 searchHist.append(genButton);
             }
+        } else if (oldCities === null) {
+
         }
     }
 
