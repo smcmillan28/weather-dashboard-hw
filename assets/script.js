@@ -50,9 +50,9 @@ $(document).ready(function () {
     function weatherData() {
 
         var cityName = citySearch.val();
-        var cityQueryUrl = "http://api.positionstack.com/v1/forward?access_key=1d9b73328157570ee57517d73c03e071&query=" + cityName;
+        var cityQueryUrl = "http://www.mapquestapi.com/geocoding/v1/address?key=EO0hAAoA7bvIqA7BLFdliVelt6rPt3My&location=" + cityName;
 
-        // Using Position Stack Geocoding API to get latitude and longitude for city input
+        // Using Mapquest Geocoding API to get latitude and longitude for city input
         // AJAX call to find where latitude and longitude are stored in the response
         $.ajax({
             url: cityQueryUrl,
@@ -60,8 +60,11 @@ $(document).ready(function () {
         }).then(function (res) {
             console.log(res);
             // Storing response object data in latitude and longitude variables
-            var lat = res.data[0].latitude;
-            var lon = res.data[0].longitude;
+            var lat = res.results[0].locations[0].displayLatLng.lat;
+            var lon = res.results[0].locations[0].displayLatLng.lng;
+
+            console.log(lat);
+            console.log(lon);
 
             // Clearing previous data from page
             currentWeather.empty();
@@ -153,7 +156,6 @@ $(document).ready(function () {
     searchBtn.on("click", addCity);
 
     // Write function that takes search history button data and re-runs weatherData function
-
     $(document).on("click", ".history", function () {
         citySearch.val($(this).text());
         weatherData();
