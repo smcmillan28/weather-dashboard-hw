@@ -50,9 +50,9 @@ $(document).ready(function () {
     function weatherData() {
 
         var cityName = citySearch.val();
-        var cityQueryUrl = "https://www.mapquestapi.com/geocoding/v1/address?key=EO0hAAoA7bvIqA7BLFdliVelt6rPt3My&location=" + cityName;
+        var cityQueryUrl = "https://api.opencagedata.com/geocode/v1/json?q=" + cityName + "&key=71439f3bcbcb4912afbab305c9f45c1c";
 
-        // Using Mapquest Geocoding API to get latitude and longitude for city input
+        // Using OpenCage Geocoding API to get latitude and longitude for city input
         // AJAX call to find where latitude and longitude are stored in the response
         $.ajax({
             url: cityQueryUrl,
@@ -60,8 +60,8 @@ $(document).ready(function () {
         }).then(function (res) {
             console.log(res);
             // Storing response object data in latitude and longitude variables
-            var lat = res.results[0].locations[0].displayLatLng.lat;
-            var lon = res.results[0].locations[0].displayLatLng.lng;
+            var lat = res.results[0].geometry.lat;
+            var lon = res.results[0].geometry.lng;
 
             console.log(lat);
             console.log(lon);
