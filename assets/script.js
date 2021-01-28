@@ -94,6 +94,13 @@ $(document).ready(function () {
                 var windSpeed = $("<h5>").text("Wind Speed: " + response.current.wind_speed + " mph");
                 var uvInd = response.current.uvi;
                 var uvDisp = $("<h5>").text("UV Index: " + uvInd);
+                if (uvInd < 3) {
+                    uvDisp.addClass("green");
+                } else if (uvInd < 6) {
+                    uvDisp.addClass("orange");
+                } else if (uvInd >= 6) {
+                    uvDisp.addClass("red");
+                }
                 allCurrent.append(currentHeader, lineBreak, cityHeader, cityTemp, humidity, windSpeed, uvDisp);
                 currentWeather.append(allCurrent);
 

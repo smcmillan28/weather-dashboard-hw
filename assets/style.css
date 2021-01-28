@@ -70,3 +70,30 @@ h5, h4 {
     margin-top: 10px;
 }
 
+.green {
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+    background-color: green;
+    display: inline;
+    padding: 5px;
+}
+
+.orange {
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+    background-color: orange;
+    display: inline;
+    padding: 5px;
+}
+
+.red {
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+    background-color: red;
+    display: inline;
+    padding: 5px;
+}
+
