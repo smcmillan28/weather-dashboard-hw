@@ -45,6 +45,7 @@ $(document).ready(function () {
             existingEntries.unshift(newCity);
             localStorage.setItem("oldCities", JSON.stringify(existingEntries));
         } else {
+            citySearch.val("");
             return;
         }
         citySearch.val("");
