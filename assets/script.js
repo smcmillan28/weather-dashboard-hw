@@ -67,9 +67,11 @@ $(document).ready(function () {
             // Storing response object data in latitude and longitude variables
             var lat = res.results[0].geometry.lat;
             var lon = res.results[0].geometry.lng;
+            var cityRendered = res.results[0].formatted;
 
             console.log(lat);
             console.log(lon);
+            console.log(cityRendered);
 
             // Clearing previous data from page
             currentWeather.empty();
@@ -91,14 +93,14 @@ $(document).ready(function () {
                 var lineBreak = $("<hr>");
                 var currentIcon = response.current.weather[0].icon;
                 var iconURL = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + currentIcon + ".png");
-                var cityHeader = $("<h4>").text(cityName + " (" + currentDay + ") ");
+                var cityHeader = $("<h5>").text(cityRendered + " (" + currentDay + ") ");
                 cityHeader.append(iconURL);
                 var currentTemp = Math.ceil(response.current.temp);
-                var cityTemp = $("<h5>").text("Temperature: " + currentTemp + " \xB0F");
-                var humidity = $("<h5>").text("Humidity: " + response.current.humidity + "%");
-                var windSpeed = $("<h5>").text("Wind Speed: " + response.current.wind_speed + " mph");
+                var cityTemp = $("<h6>").text("Temperature: " + currentTemp + " \xB0F");
+                var humidity = $("<h6>").text("Humidity: " + response.current.humidity + "%");
+                var windSpeed = $("<h6>").text("Wind Speed: " + response.current.wind_speed + " mph");
                 var uvInd = response.current.uvi;
-                var uvDisp = $("<h5>").text("UV Index: " + uvInd);
+                var uvDisp = $("<h6>").text("UV Index: " + uvInd);
                 if (uvInd < 3) {
                     uvDisp.addClass("green");
                 } else if (uvInd < 6) {
